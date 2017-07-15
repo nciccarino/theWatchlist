@@ -1,0 +1,34 @@
+{
+  "name": "watchlist",
+  "version": "1.0.0",
+  "description": "watchlist for movies and series",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nciccarino/theWatchlist"
+  },
+  "author": "eduardo moura, abdul khan, nick ciccarino, nico santa ana",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nciccarino/theWatchlist/issues"
+  },
+  "homepage": "https://github.com/nciccarino/theWatchlist#readme",
+  "dependencies": {
+    "bcrypt-nodejs": "0.0.3",
+    "body-parser": "^1.17.2",
+    "express": "^4.15.3",
+    "express-session": "^1.15.3",
+    "imdb-api": "^3.1.1",
+    "mysql": "^2.13.0",
+    "mysql2": "^1.3.5",
+    "passport": "^0.3.2",
+    "passport-local": "^1.0.0",
+    "path": "^0.12.7",
+    "sequelize": "^4.3.0",
+    "sequelize-cli": "^2.7.0"
+  }
+}

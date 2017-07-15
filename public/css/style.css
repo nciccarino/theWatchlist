@@ -1,0 +1,141 @@
+body {
+	background-image: url("http://www.jalsolution.com/oldsite/slides/background3.jpeg");
+}
+
+h1 {
+    text-shadow: 15px 15px black;
+    color: white;
+    font-family: impact;
+    text-align: center;
+    font-size: 128px;
+    kerning: 5px;
+    letter-spacing: 5px;
+    margin-top: 250px;
+    
+
+
+}
+
+h2 {
+
+    text-shadow: 8px 8px black;
+    color: white;
+    font-family: impact;
+    text-align: center;
+    font-size: 60px;
+    kerning: 5px;
+    letter-spacing: 5px;
+    margin-top: 50px;
+    
+}
+
+
+#movie{
+	position: relative;
+	top: 50%;
+	left: 35%;
+	margin-top: 35px;
+	margin-right: 25px;
+
+}
+
+#series{
+	position: relative;
+	top: 50%;
+	left: 40%;
+	margin-top: 35px;
+	margin-left: 25px;
+
+}
+
+/*Movies & Series Page*/
+#dropmenu{
+	position: relative;
+	align-self: center;
+	/*left:40%;*/
+}
+.dropdown {
+    text-align: center;
+}
+
+.button {
+    position: absolute;
+    top: 50%;
+}
+
+.panel{
+	margin-top: 15px;
+}
+
+ul{
+	position: absolute;
+	text-align: center;
+}
+
+#firstModalFooter {
+    display: none;
+}
+
+
+.block{
+    float: left;
+    margin: 5px 15px 10px 10px;
+    text-align: center;
+}
+
+.searchBlock {
+    float: left;
+    text-align: center; 
+    margin: 5px 15px 10px 10px;
+}
+
+#personalMovie-form{
+    display: none;
+}
+
+.movieAjax{
+    display:block;
+}
+
+#deleteMovieBtn {
+    width: 100%;
+}
+
+#home{
+    position: relative;
+    top: 50%;
+    left: 44%;
+    margin-top: 35px;
+    margin-left: 25px;
+}
+
+.searchContainer{
+    display: none;
+}
+
+.movieAjax {
+    margin-top: 10px;
+    padding: 10px;
+    border: 2px solid; 
+    border-color: #2c3e50; 
+    color: black;
+    border-radius: 6px;
+}
+
+.modal-header {
+    background-color: #2c3e50; 
+    color: white;
+    text-align: center; 
+}
+
+.ajaxStyle {
+    margin: 5px;
+}
+
+.plot {
+    line-height: 30px; 
+}
+
+.titleText {
+    width: 200px;
+}
