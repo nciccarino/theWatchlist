@@ -85,7 +85,8 @@ module.exports= function(app){
 			category: req.body.category,
 			notes: req.body.notes,
 			imdb_id: req.body.imdb_id,
-			poster: req.body.poster
+			poster: req.body.poster,
+      userID: req.body.userID
 			
 		}).then(function(data) {
 			res.json(data);

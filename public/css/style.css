@@ -139,3 +139,21 @@ ul{
 .titleText {
     width: 200px;
 }
+
+.signup, .login {
+    background-color: white;
+    padding: 10px;
+    border: 2px solid;
+    border-color: #2e3e50;
+    color: black;
+    border-radius: 6px;
+}
+
+#or {
+    background-color: white;
+    padding: 10px;
+    border: 2px solid;
+    border-color: #2e3e50;
+    color: black;
+    border-radius: 6px;
+}

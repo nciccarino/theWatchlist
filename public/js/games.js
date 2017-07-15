@@ -29,6 +29,12 @@ $(document).ready(function(){
   var updateObj;
   var id;
 
+  var userSelect; 
+
+  $.get("/api/user_data").then(function(data){
+    userSelect = data.email; 
+  })
+
   $('#addMovie').on("click", function() {
      $('#modelWindow').modal('show');
   });
@@ -90,17 +96,17 @@ $(document).ready(function(){
             // console.log($('.futureDiv'+i).data('clickedData').imdb_id);
 
           // }//end first if
-          if(data[i].category =="futureGames"){
+          if(data[i].category =="futureGames" && userSelect == data[i].userID){
             //populate into future section using .html
             futureContainer.append(futureDiv);
 
           }
-          else if(data[i].category=="currentGames"){
+          else if(data[i].category=="currentGames" && userSelect == data[i].userID){
             //populate into current section .html
             currentContainer.append(futureDiv);
 
           }
-          else if(data[i].category=="finishedGames"){
+          else if(data[i].category=="finishedGames" && userSelect == data[i].userID){
             //populate onto the watched section .html
             finishedContainer.append(futureDiv);
           }
@@ -302,7 +308,8 @@ $(document).ready(function(){
       category: addArray[3],
       notes: addArray[4],
       imdb_id: addArray[2],
-      poster: addArray[0]
+      poster: addArray[0],
+      userID: userSelect
     }; 
 
     console.log("\nNEW MOVIE OBJECT CREATED:")

@@ -36,6 +36,12 @@ $(document).ready(function(){
 	//if the poster of a show changes update database poster url
 	var changedPoster; 
 
+	var userSelect; 
+
+	$.get("/api/user_data").then(function(data){
+		userSelect = data.email; 
+	})
+
 	$('#addMovie').on("click", function() {
 	   $('#modelWindow').modal('show');
 	});
@@ -97,24 +103,24 @@ $(document).ready(function(){
 	      		// console.log($('.futureDiv'+i).data('clickedData').imdb_id);
 
 	      	// }//end first if
-	      	if(data[i].category =="futureSeries"){
+	      	if(data[i].category =="futureSeries" && userSelect == data[i].userID){
 	      		//populate into future section using .html
 	      		futureContainer.append(futureDiv);
 
 	      	}
-	      	else if(data[i].category=="currentSeries"){
+	      	else if(data[i].category=="currentSeries" && userSelect == data[i].userID){
 	      		//populate into current section .html
 	      		currentContainer.append(futureDiv);
 
 	      	}
-	      	else if(data[i].category=="finishedSeries"){
+	      	else if(data[i].category=="finishedSeries" && userSelect == data[i].userID){
 	      		//populate onto the watched section .html
 	      		finishedContainer.append(futureDiv);
 	      	}
-	      	else if(data[i].category=="notCaughtUpSeries") {
+	      	else if(data[i].category=="notCaughtUpSeries" && userSelect == data[i].userID) {
 	      		notCaughtUpContainer.append(futureDiv);
 	      	}
-	      	else if(data[i].category=="caughtUpSeries") {
+	      	else if(data[i].category=="caughtUpSeries" && userSelect == data[i].userID) {
 	      		caughtUpContainer.append(futureDiv);
 	      	}
 	      }
@@ -343,7 +349,8 @@ $(document).ready(function(){
 			category: addArray[3],
 			notes: addArray[4],
 			imdb_id: addArray[2],
-			poster: addArray[0]
+			poster: addArray[0],
+			userID: userSelect
 		}; 
 
 		console.log("\nNEW MOVIE OBJECT CREATED:")
