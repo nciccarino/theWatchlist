@@ -15,6 +15,9 @@ module.exports = function(sequelize, DataTypes){
 		}, 
 		poster: {
 			type: DataTypes.STRING,
+		}, 
+		userID: {
+			type: DataTypes.STRING
 		}
 
 	},
