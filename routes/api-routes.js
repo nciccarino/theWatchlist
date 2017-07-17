@@ -63,11 +63,6 @@ module.exports= function(app){
     }
   });
 
-
-
-
-
-
 	//route to handle imdb get movie request
 	app.get('/api/movies', function(req, res){
 		console.log(db.Movie)

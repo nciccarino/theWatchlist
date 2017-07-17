@@ -10,14 +10,10 @@ h1 {
     font-size: 128px;
     kerning: 5px;
     letter-spacing: 5px;
-    margin-top: 250px;
-    
-
-
+    margin-top: 150px;
 }
 
 h2 {
-
     text-shadow: 8px 8px black;
     color: white;
     font-family: impact;
@@ -25,8 +21,7 @@ h2 {
     font-size: 60px;
     kerning: 5px;
     letter-spacing: 5px;
-    margin-top: 50px;
-    
+    margin-top: 50px;  
 }
 
 
@@ -140,7 +135,7 @@ ul{
     width: 200px;
 }
 
-.signup, .login {
+.signup, .login, #or {
     background-color: white;
     padding: 10px;
     border: 2px solid;
@@ -149,11 +144,24 @@ ul{
     border-radius: 6px;
 }
 
-#or {
-    background-color: white;
-    padding: 10px;
+#logoutBtn {
+    position: relative;
+    left: 45%;
+    margin-top: 35px;
+    margin-right: 25px;
+    margin-bottom: 20px;
+}
+
+.loggedInID {
+    background-color: white; 
     border: 2px solid;
     border-color: #2e3e50;
     color: black;
     border-radius: 6px;
+    position: relative;
+    left: 40%;
+    margin-top: 35px;
+    margin-right: 25px;
+    width: 250px;
+    text-align: center;
 }

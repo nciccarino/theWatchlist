@@ -7,6 +7,7 @@ $(document).ready(function() {
   // When the signup button is clicked, we validate the email and password are not blank
   signUpForm.on("submit", function(event) {
     event.preventDefault();
+
     var userData = {
       email: emailInput.val().trim(),
       password: passwordInput.val().trim()
@@ -39,4 +40,5 @@ $(document).ready(function() {
     $("#alert .msg").text(err.responseJSON);
     $("#alert").fadeIn(500);
   }
+
 });
