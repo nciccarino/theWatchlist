@@ -8,4 +8,4 @@
 
 ## Users have the ability to update and delete content as they please. 
 
-## Utilizes Passport.js, imdb-api npm package, sequelize, mysql, node.js, and express along with other support packages.
+## Utilizes Passport.js, imdb-api npm package, sequelize, MySQL, node.js, and Express along with other support packages.
