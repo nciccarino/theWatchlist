@@ -78,6 +78,11 @@ ul{
     text-align: center;
 }
 
+.block:hover {
+    background: #2f6fa7;
+    color: white;
+}
+
 .searchBlock {
     float: left;
     text-align: center; 
@@ -133,6 +138,10 @@ ul{
 
 .titleText {
     width: 200px;
+}
+
+.titleTextEntry {
+    font-size: 100%; 
 }
 
 .signup, .login, #or {
