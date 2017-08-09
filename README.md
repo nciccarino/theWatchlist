@@ -12,4 +12,4 @@
 
 https://personalwatchlist.herokuapp.com/
 
-![image-1](https://instructions/1.PNG)
+![image-1](instructions/1.PNG)
