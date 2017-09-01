@@ -6,7 +6,6 @@ module.exports = function(sequelize, DataTypes){
 		category: {
 			type: DataTypes.STRING,
 		},
-
 		notes: {
 			type: DataTypes.STRING,
 		},
