@@ -67,7 +67,6 @@ $(document).ready(function(){
 	//run as soon as the page loads. this populates sections with movie form Database
 	moviePopulator(); 
 
-
 	//ajax request to pull data from the database/server
 	//Then calls function to populate it on the page
 	function moviePopulator(){
@@ -81,6 +80,8 @@ $(document).ready(function(){
 	      $(".futureBody").empty();
 	      //populate movies onto front end
 	      for(var i = 0; i< data.length; i++){
+
+	      		console.log(data[i].poster)
 	 
 	      		var futureDiv = $("<div>");
 	      		futureDiv.addClass("futureDiv" +i);
