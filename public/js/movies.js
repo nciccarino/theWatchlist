@@ -371,4 +371,3 @@ $(document).ready(function(){
 	}; //handleMovieFormSubmit
 
 });
-

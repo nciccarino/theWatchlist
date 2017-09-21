@@ -16,11 +16,6 @@ module.exports= function(app){
 	});
 
 	 app.get('/movie/:id', function(req, res){
-	 	// console.log(String(req.params.id));
-
-	 	// console.log(typeof req.params.id);
-	 	// var string= "slfns";
-	 	// console.log(typeof string)
 
 	    imdb.getById(
 	       req.params.id,
