@@ -64,6 +64,10 @@ h2 {
 	margin-top: 15px;
 }
 
+.panelTitle {
+    text-align: center; 
+}
+
 ul{
 	position: absolute;
 	text-align: center;
