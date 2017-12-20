@@ -66,7 +66,12 @@ module.exports= function(app){
 	//route to handle imdb get movie request
 	app.get('/api/movies', function(req, res){
 		console.log(db.Movie)
-		db.Movie.findAll({}).then(function(data){
+		db.Movie.findAll({},
+      {
+        where: {
+          userID: req.body.userID
+        }
+      }).then(function(data){
 			console.log(data);
 			res.json(data);
 		})
@@ -100,7 +105,8 @@ module.exports= function(app){
 
         {
             where: {
-                imdb_id: req.body.imdb_id
+                imdb_id: req.body.imdb_id,
+                userID: req.body.userID
             }
 
         }).then(function(data){
@@ -111,7 +117,8 @@ module.exports= function(app){
 	app.delete("/api/movies", function(req, res) {
 		db.Movie.destroy({
 			where: {
-				imdb_id: req.body.imdb_id
+				imdb_id: req.body.imdb_id,
+        userID: req.body.userID
 			}
 		}).then(function(data) {
 			res.json(data); 

@@ -70,9 +70,15 @@ $(document).ready(function(){
 	//ajax request to pull data from the database/server
 	//Then calls function to populate it on the page
 	function moviePopulator(){
+
+  	updateObj ={
+  		userID: userSelect
+  	}
+
 	  $.ajax({
 	      method: 'GET',
-	      url: '/api/movies'
+	      url: '/api/movies',
+	      data: updateObj
 	  }).done(function(data){
 	  		console.log("\nData from the server using moviePopulator() [pulling from our API]");
 	      console.log(data);
@@ -167,7 +173,8 @@ $(document).ready(function(){
   	updateObj ={
   		category: changedCategory,
   		notes: changedNotes,
-  		imdb_id: id
+  		imdb_id: id,
+  		userID: userSelect
   	}
 
   	console.log("RIGHT BEFORE THE ROUTE")
@@ -186,7 +193,8 @@ $(document).ready(function(){
   function handleDelete(){
 
   	updateObj ={
-  		imdb_id: id
+  		imdb_id: id,
+  		userID: userSelect
   	}
 
   	$.ajax({
