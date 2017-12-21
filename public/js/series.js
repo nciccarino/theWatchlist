@@ -209,7 +209,7 @@ $(document).ready(function(){
     })
     .done(function() {
       console.log("put worked")
-     window.location.href = "/series";
+     window.location.href = "/";
     });
   }
 
@@ -228,7 +228,7 @@ $(document).ready(function(){
     })
     .done(function() {
       console.log("delete worked")
-      window.location.href = "/series";
+      window.location.href = "/";
     });
 
 
@@ -393,7 +393,7 @@ $(document).ready(function(){
 			console.log("posted data");	
 
 			//redirects us back to the movies html
-			window.location.href = "/series";
+			window.location.href = "/";
 
 		})
 	}//handle submitMovie
