@@ -33,7 +33,17 @@ $(document).ready(function(){
 
   $.get("/api/user_data").then(function(data){
     userSelect = data.email; 
+    $("#loginID").html("<p><b>" + data.email + "</b></p>").addClass("loggedInID");
   })
+
+  $("#logoutBtn").on("click", handleLogout); 
+
+  function handleLogout() {
+    $.get("/logout").then(function() {
+      window.location.href = "/";
+      console.log("logging out")
+    })
+  }
 
   $('#addMovie').on("click", function() {
      $('#modelWindow').modal('show');

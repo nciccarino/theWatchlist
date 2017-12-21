@@ -33,7 +33,17 @@ $(document).ready(function(){
 
 	$.get("/api/user_data").then(function(data){
 		userSelect = data.email; 
+		$("#loginID").html("<p><b>" + data.email + "</b></p>").addClass("loggedInID");
 	})
+
+  $("#logoutBtn").on("click", handleLogout); 
+
+  function handleLogout() {
+  	$.get("/logout").then(function() {
+  		window.location.href = "/";
+  		console.log("logging out")
+  	})
+  }
 
 	$('#addMovie').on("click", function() {
 	   $('#modelWindow').modal('show');
@@ -100,9 +110,9 @@ $(document).ready(function(){
 	      		futureDiv.data("clickedData", data[i]);
 
 	      		// console.log(data[i].imdb_id)	
-	      		// console.log($('.futureDiv'+i).data('clickedData').imdb_id);
-
+	      		// console.log($('.futureDiv'+i).data('clickedData').imdb_id); 
 	      	// }//end first if
+
 	      	if(data[i].category =="future" && userSelect == data[i].userID){
 	      		//populate into future section using .html
 	      		futureContainer.append(futureDiv);
@@ -117,6 +127,7 @@ $(document).ready(function(){
 	      		//populate onto the watched section .html
 	      		finishedContainer.append(futureDiv);
 	      	}
+
 	      }
 	  })
 	}

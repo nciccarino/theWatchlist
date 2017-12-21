@@ -1,48 +1,57 @@
 body {
-	background-image: url("http://www.jalsolution.com/oldsite/slides/background3.jpeg");
-    /*background-image: url("http://ipadflava.com/wp-content/uploads/orange-hue.png");*/
-    /*background-image: url("https://ak2.picdn.net/shutterstock/videos/17175763/thumb/1.jpg"); */
+    background-color: #2b2b2b;
 }
 
-h1 {
-    text-shadow: 15px 15px black;
+.introHeaders {
+    text-align: center; 
     color: white;
-    font-family: impact;
-    text-align: center;
-    font-size: 128px;
-    kerning: 5px;
-    letter-spacing: 5px;
-    margin-top: 150px;
+    margin-top: 50px;
+    font-size: 100px;
+    font-family: 'Bungee', cursive;
 }
 
-h2 {
-    text-shadow: 8px 8px black;
+.introText {
+    text-align: center;
+    font-size: 50px;
+    font-family: 'Bungee', cursive;
+}
+
+.navbar {
+    margin-bottom: 50px;
+}
+
+#titleNav {
     color: white;
-    font-family: impact;
-    text-align: center;
-    font-size: 60px;
-    kerning: 5px;
-    letter-spacing: 5px;
-    margin-top: 50px;  
+    margin-right: 20px;
+    margin-left: 100px;
+    float: left;
+    position: relative;
+    font-size: 50px;
+    font-family: 'Bungee', cursive;
 }
 
-
-#movie{
-	position: relative;
-	top: 50%;
+#navbar-list {
+    /*margin-right: 50%;*/
     float: left;
-	margin-top: 35px;
-    margin-left: 25%;
-
+    /*left: 50%;*/
+    margin-top: 15px;
 }
 
-#series{
-	position: relative;
-	top: 50%;
-    float: left;
-	margin-top: 35px;
-	margin-left: 25px;
+.loggedInID {
+    background-color: white; 
+    border: 2px solid;
+    border-color: #2e3e50;
+    color: black;
+    border-radius: 6px;
+    font-size: 19px; 
+    padding: 14px 15px 10px 15px;
+    line-height: 1.3333333; 
+    display: inline-block;
+    position: absolute;
+}
 
+#logoutBtn:hover {
+    color: red;
 }
 
 /*Movies & Series Page*/
@@ -107,14 +116,6 @@ ul{
     width: 100%;
 }
 
-#home{
-    position: relative;
-    top: 50%;
-    left: 44%;
-    margin-top: 35px;
-    margin-left: 25px;
-}
-
 .searchContainer{
     display: none;
 }
@@ -159,28 +160,24 @@ ul{
     border-radius: 6px;
 }
 
-#logoutBtn {
-    position: relative;
-    float: left;
-    margin-top: 35px;
-    margin-left: 20px;
-    margin-bottom: 20px;
-}
-
-.loggedInID {
-    background-color: white; 
-    border: 2px solid;
-    border-color: #2e3e50;
-    color: black;
-    border-radius: 6px;
-    position: relative;
-    float: left;
-    margin-top: 35px;
-    margin-left: 25%;
-    width: 250px;
-    text-align: center;
-}
-
 .panel-title {
     font-size: 30px; 
+}
+
+#footer {
+    text-align: left; 
+    background-color: #2c3e50;
+    color: white;
+    padding: 20px;
+    bottom: 0;
+}
+
+.links {
+    border-left: solid;
+    border-left-color: white;
+    border-left-width: 2px;
+}
+
+.copy {
+    padding-top: 20px;
 }
