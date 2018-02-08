@@ -18,6 +18,7 @@ body {
 
 .navbar {
     margin-bottom: 50px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
 #titleNav {
@@ -88,14 +89,21 @@ ul{
 
 
 .block{
+    background-color: #ecf0f1;
     float: left;
     margin: 5px 15px 10px 10px;
     text-align: center;
+    /*box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);*/
 }
 
-.block:hover {
-    background: #2f6fa7;
+/*.block:hover {
+    background-color: #2f6fa7;
     color: white;
+}*/
+
+.blockImage {
+    width: 300px;
+    height: 400px;
 }
 
 .searchBlock {
@@ -170,14 +178,11 @@ ul{
     color: white;
     padding: 20px;
     bottom: 0;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
 .links {
     border-left: solid;
     border-left-color: white;
     border-left-width: 2px;
-}
-
-.copy {
-    padding-top: 20px;
 }

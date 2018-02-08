@@ -108,9 +108,9 @@ $(document).ready(function(){
 	      		var futureDiv = $("<div>");
 	      		futureDiv.addClass("futureDiv" +i);
 	      		futureDiv.addClass("block");
-	      		var titleDiv = $("<h4>" + data[i].title + "</h4>").addClass("titleTextEntry");
-	      		var imgDiv = $("<img src= " + data[i].poster + "alt= 'poster' height= '300px' width= '200px'>");
-	      		futureDiv.append(titleDiv);
+	      		// var titleDiv = $("<h4>" + data[i].title + "</h4>").addClass("titleTextEntry");
+	      		var imgDiv = $("<img src= " + data[i].poster + "alt= 'poster'>").addClass("blockImage");
+	      		// futureDiv.append(titleDiv);
 	      		futureDiv.append(imgDiv);
 
 	      		futureDiv.data("clickedData", data[i]);
