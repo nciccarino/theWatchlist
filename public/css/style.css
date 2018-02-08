@@ -45,10 +45,10 @@ body {
     color: black;
     border-radius: 6px;
     font-size: 19px; 
-    padding: 14px 15px 10px 15px;
+    padding: 8px 15px 4px 15px;
     line-height: 1.3333333; 
     display: inline-block;
-    position: absolute;
+    /*position: absolute;*/
 }
 
 #logoutBtn:hover {
