@@ -93,12 +93,12 @@ ul{
     float: left;
     padding: 8px;
     text-align: center;
+    border-style: solid;
+    border-radius: 6px;
 }
 
 .block:hover {
     box-shadow: 0 0 20px #1d878a;
-    border-style: solid;
-    border-radius: 6px;
     background-color: #1d878a;
 }
 
