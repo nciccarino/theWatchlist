@@ -87,12 +87,17 @@ ul{
     display: none;
 }
 
+.content-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
 
 .block{
     background-color: white;
-    float: left;
+    display: inline-block;
     padding: 8px;
-    text-align: center;
+    margin: 0 auto;
     border-style: solid;
     border-radius: 6px;
 }
