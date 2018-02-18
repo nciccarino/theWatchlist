@@ -38,6 +38,8 @@ $(document).ready(function(){
 
 	var userSelect; 
 
+	var searchMovie; 
+
 	$.get("/api/user_data").then(function(data){
 		userSelect = data.email; 
 		$("#loginID").html("<p><b>" + data.email + "</b></p>").addClass("loggedInID");
@@ -57,7 +59,7 @@ $(document).ready(function(){
 	});
 
 	//christians help--- callback for ajax search on a specified movie
-	$("#searchTop").on("click", handleMovieFormSearch); 
+	$("#searchTop").on("click", handleMovieFormSearch)
 
 	//dynamically adding event listeners to dynamically created buttons
 	$(document.body).on('click', 'button#add', handleAdd);
@@ -235,17 +237,17 @@ $(document).ready(function(){
   }
   
 
-	function movieSearch(searchMovie){
+	function movieSearch(){
 		$.ajax({
 			method: 'GET',
 			url: '/imdb-search/' + searchMovie
 		}).done(function(data){
-
 			console.log("\nAJAX RESPONSE");
 			console.log(data.results);
 
 			var results = data.results; 
-			searchContainer.empty(); 
+			searchContainer.empty();
+			searchBody.empty(); 
 
 			for (var i = 0; i < results.length; i++) {
 				// topSearch.push(createSearchContainer(results[i])); 
@@ -286,6 +288,8 @@ $(document).ready(function(){
 		}); 
 	} //end movieSearch 
 
+
+// -----------------------------------------------------------------------------------
 
 	function handleAdd() {
 		// event.preventDefault(); 
@@ -402,10 +406,13 @@ $(document).ready(function(){
 	function handleMovieFormSearch(event) {
 		event.preventDefault();	
 
+		// $("#searchTop").css('display', 'none')
+
 		searchContainer.show()
 		//show the panel body once user clicks search;
-		var searchMovie = $("#searchMovie").val().trim();
-		movieSearch(searchMovie);
+		searchMovie = $("#searchMovie").val().trim();
+		movieSearch();
+
 	}; //handleMovieFormSubmit
 
 });

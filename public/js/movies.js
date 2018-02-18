@@ -231,6 +231,8 @@ $(document).ready(function(){
 
 			var results = data.results; 
 			searchContainer.empty(); 
+			searchBody.empty(); 
+
 
 			for (var i = 0; i < results.length; i++) {
 				// topSearch.push(createSearchContainer(results[i])); 
