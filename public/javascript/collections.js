@@ -1,18 +1,10 @@
 $(document).ready(function(){
 
+	allMoviePopulator(); 
+
 	var searchContainer= $('.searchContainer');
 
 	var searchBody = $('.panelBlock');
-
-	var futureContainer=  $('.futureBody');
-
-	var currentContainer=  $('.currentBody');
-
-	var finishedContainer=  $('.finishedBody');
-
-	var notCaughtUpContainer = $(".notCaughtUpBody"); 
-
-	var caughtUpContainer = $(".caughtUpBody"); 
 
 	var chosenContainer= $(".chosenContainer");
 
@@ -42,7 +34,7 @@ $(document).ready(function(){
 
 	$.get("/api/user_data").then(function(data){
 		userSelect = data.email; 
-		$("#loginID").html("<p><b>" + data.email + "</b></p>").addClass("loggedInID");
+		$("#loginID2").html("<b>" + data.email + "</b>");
 	})
 
   $("#logoutBtn").on("click", handleLogout); 
@@ -54,7 +46,7 @@ $(document).ready(function(){
   	})
   }
 
-	$('#addMovie').on("click", function() {
+	$('#addTitle').on("click", function() {
 	   $('#modelWindow').modal('show');
 	});
 
@@ -83,11 +75,26 @@ $(document).ready(function(){
 
 	$("#deleteMovieBtn").on("click", handleDelete);
 
+	$("#allOption").on("click", allMoviePopulator)
+
+	$('.collectionOption').on("click", categoryPopulator)
+
 	//run as soon as the page loads. this populates sections with movie form Database
-	moviePopulator(); 
+	// allMoviePopulator(); 
 	//ajax request to pull data from the database/server
 	//Then calls function to populate it on the page
-	function moviePopulator(){
+
+	function categoryPopulator() {
+		$('#addTitle').css('display', 'block')
+
+		$(".view").empty();
+
+
+	}
+
+	function allMoviePopulator(){
+
+		$('#addTitle').css('display', 'none')
 
 		updateObj ={
 			userID: userSelect
@@ -101,7 +108,10 @@ $(document).ready(function(){
 	  		console.log("\nData from the server using moviePopulator() [pulling from our API]");
 	      console.log(data);
 
-	      $(".futureBody").empty();
+	      $(".view").empty();
+
+	      var allContainer = $('<div class="row"><div class= "col-xs-12"><div class="panel panel-default"><div class="panel-heading"><h3 class="panel-title panelTitle">All Titles</h3></div><div class="panel-body content-wrapper allTitles"></div></div></div><div>')
+
 	      //populate movies onto front end
 	      for(var i = 0; i< data.length; i++){
 	      		var futureDiv = $("<div>");
@@ -109,27 +119,9 @@ $(document).ready(function(){
 	      		futureDiv.addClass("block");
 	      		var imgDiv = $("<img src= " + data[i].poster + "alt= 'poster'>").addClass("blockImage");
 	      		futureDiv.append(imgDiv);
-
 	      		futureDiv.data("clickedData", data[i]);
-
-	      	if(data[i].category =="futureSeries" && userSelect == data[i].userID){
-	      		//populate into future section using .html
-	      		futureContainer.append(futureDiv);
-	      	}
-	      	else if(data[i].category=="currentSeries" && userSelect == data[i].userID){
-	      		//populate into current section .html
-	      		currentContainer.append(futureDiv);
-	      	}
-	      	else if(data[i].category=="finishedSeries" && userSelect == data[i].userID){
-	      		//populate onto the watched section .html
-	      		finishedContainer.append(futureDiv);
-	      	}
-	      	else if(data[i].category=="notCaughtUpSeries" && userSelect == data[i].userID) {
-	      		notCaughtUpContainer.append(futureDiv);
-	      	}
-	      	else if(data[i].category=="caughtUpSeries" && userSelect == data[i].userID) {
-	      		caughtUpContainer.append(futureDiv);
-	      	}
+	      		$('.allTitles').append(futureDiv)
+	      		$('.view').append(allContainer)
 	      }
 	  })
 	}

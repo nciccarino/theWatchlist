@@ -5,7 +5,6 @@ var imdb = require('imdb-api');
 
 module.exports= function(app){
 
-
 //PASSPORT ROUTES
 
  // Using the passport.authenticate middleware with our local strategy.
