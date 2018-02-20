@@ -31,10 +31,13 @@ $(document).ready(function(){
 
   var userSelect; 
 
-  $.get("/api/user_data").then(function(data){
-    userSelect = data.email; 
-    $("#loginID").html("<p><b>" + data.email + "</b></p>").addClass("loggedInID");
-  })
+  function getEmail() {
+    $.get("/api/user_data").then(function(data){
+      userSelect = data.id; 
+      $("#loginID").html("<p><b>" + data.email + "</b></p>").addClass("loggedInID");
+      moviePopulator(); 
+    })
+  }
 
   $("#logoutBtn").on("click", handleLogout); 
 
@@ -74,21 +77,15 @@ $(document).ready(function(){
 
   $("#deleteMovieBtn").on("click", handleDelete);
 
-  //run as soon as the page loads. this populates sections with movie form Database
-  moviePopulator(); 
-
-
   //ajax request to pull data from the database/server
   //Then calls function to populate it on the page
   function moviePopulator(){
 
-    updateObj ={
-      userID: userSelect
-    }
+    var idUser = userSelect
 
     $.ajax({
         method: 'GET',
-        url: '/api/movies',
+        url: '/api/movies/' + idUser,
         data: updateObj
     }).done(function(data){
         console.log("\nData from the server using moviePopulator() [pulling from our API]");
@@ -107,9 +104,6 @@ $(document).ready(function(){
             futureDiv.append(imgDiv);
 
             futureDiv.data("clickedData", data[i]);
-
-            // console.log(data[i].imdb_id) 
-            // console.log($('.futureDiv'+i).data('clickedData').imdb_id);
 
           // }//end first if
           if(data[i].category =="futureGames" && userSelect == data[i].userID){
@@ -364,5 +358,7 @@ $(document).ready(function(){
     var searchMovie = $("#searchMovie").val().trim();
     movieSearch(searchMovie);
   }; //handleMovieFormSubmit
+
+  getEmail()
 
 });

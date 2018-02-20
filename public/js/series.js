@@ -40,10 +40,13 @@ $(document).ready(function(){
 
 	var searchMovie; 
 
-	$.get("/api/user_data").then(function(data){
-		userSelect = data.email; 
-		$("#loginID").html("<p><b>" + data.email + "</b></p>").addClass("loggedInID");
-	})
+	function getEmail() {
+		$.get("/api/user_data").then(function(data){
+			userSelect = data.id; 
+			$("#loginID").html("<p><b>" + data.email + "</b></p>").addClass("loggedInID");
+			moviePopulator(); 
+		})
+	}
 
   $("#logoutBtn").on("click", handleLogout); 
 
@@ -84,19 +87,19 @@ $(document).ready(function(){
 	$("#deleteMovieBtn").on("click", handleDelete);
 
 	//run as soon as the page loads. this populates sections with movie form Database
-	moviePopulator(); 
 	//ajax request to pull data from the database/server
 	//Then calls function to populate it on the page
 	function moviePopulator(){
 
-		updateObj ={
-			userID: userSelect
-		}
+		// updateObj ={
+		// 	userID: userSelect
+		// }
+
+		var idUser = userSelect
 
 	  $.ajax({
 	      method: 'GET',
-	      url: '/api/movies',
-	      data: updateObj
+	      url: '/api/movies/' + idUser
 	  }).done(function(data){
 	  		console.log("\nData from the server using moviePopulator() [pulling from our API]");
 	      console.log(data);
@@ -308,11 +311,6 @@ $(document).ready(function(){
 		//reset the array for hold the movie object
 		addArray=[];
 
-		//button
-		// console.log($(this));
-		//shows that the button is type of object
-		// console.log(typeof $(this))
-
 		//target the selected div where the movie is stored. 'this' refers to the add button (which is an object!)
 		//** 'this' always refers to the value of an object	(invoking object) **
 	 	currentPosition = $(this)
@@ -426,6 +424,8 @@ $(document).ready(function(){
 		movieSearch();
 
 	}; //handleMovieFormSubmit
+
+	getEmail()
 
 });
 

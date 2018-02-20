@@ -1,63 +1,15 @@
-$(document).ready(function(){
-
-	allMoviePopulator(); 
-
-	var searchContainer= $('.searchContainer');
-
-	var searchBody = $('.panelBlock');
-
-	var chosenContainer= $(".chosenContainer");
-
-	var chosenTitle= $(".chosenTitle"); 
-
-	var chosenCategory= $(".chosenCategory");
-
-	var chosenNotes= $(".chosenNotes");
-
-	var currentPosition;
-
-	var addArray= [];
-
+$(document).ready(function(){ 
 	//store value when user updates category
 	var changedCategory;
 	//store value when user updates Notes
 	var changedNotes;
 	var updateObj;
 	var id;
-
+	var userSelect;
 	//if the poster of a show changes update database poster url
 	var changedPoster; 
 
-	var userSelect; 
-
-	var searchMovie; 
-
-	$.get("/api/user_data").then(function(data){
-		userSelect = data.email; 
-		$("#loginID2").html("<b>" + data.email + "</b>");
-	})
-
-  $("#logoutBtn").on("click", handleLogout); 
-
-  function handleLogout() {
-  	$.get("/logout").then(function() {
-  		window.location.href = "/";
-  		console.log("logging out")
-  	})
-  }
-
-	$('#addTitle').on("click", function() {
-	   $('#modelWindow').modal('show');
-	});
-
-	//christians help--- callback for ajax search on a specified movie
-	$("#searchTop").on("click", handleMovieFormSearch)
-
-	//dynamically adding event listeners to dynamically created buttons
-	$(document.body).on('click', 'button#add', handleAdd);
-
-	//event listener for when user adds movie to the database
-	$("#modalSubmit").on("click", handleSubmit);
+  $("#logoutBtn2").on("click", handleLogout); 
 
 	//event listen when the user clicks on a movie displayed on front end
 	$(document.body).on("click", '.block', handleMyMovie);
@@ -75,40 +27,53 @@ $(document).ready(function(){
 
 	$("#deleteMovieBtn").on("click", handleDelete);
 
-	$("#allOption").on("click", allMoviePopulator)
+	$("#allOption").on("click", handleAll)
 
 	$('.collectionOption').on("click", categoryPopulator)
 
-	//run as soon as the page loads. this populates sections with movie form Database
-	// allMoviePopulator(); 
-	//ajax request to pull data from the database/server
-	//Then calls function to populate it on the page
+  function getEmail () {
+    $.get("/api/user_data").then(function(data){
+      console.log(data)
+      var emailData = data.email; 
+      userSelect = data.id; 
+      $("#loginID2").html("<b>" + emailData + "</b>");
+      allMoviePopulator()
+    })
+  }
+
+  function handleLogout() {
+    $.get("/logout").then(function() {
+      window.location.href = "/";
+      console.log("logging out")
+    })
+  }
+
+  function handleAll() {
+    $('.allView').css('display', 'block')
+    $('#addTitle').css('display', 'none')
+    $('.categoryView').css('display', 'none')
+  }
 
 	function categoryPopulator() {
+    $(".view").empty();
+    $('.allView').css('display', 'none')
+    $('.categoryView').css('display', 'block')
 		$('#addTitle').css('display', 'block')
-
-		$(".view").empty();
-
-
 	}
 
 	function allMoviePopulator(){
 
-		$('#addTitle').css('display', 'none')
+    $('#addTitle').css('display', 'none')
 
-		updateObj ={
-			userID: userSelect
-		}
+    console.log(userSelect)
+
+    var idUser = userSelect
 
 	  $.ajax({
 	      method: 'GET',
-	      url: '/api/movies',
-	      data: updateObj
+	      url: '/api/movies/' + idUser
 	  }).done(function(data){
-	  		console.log("\nData from the server using moviePopulator() [pulling from our API]");
-	      console.log(data);
-
-	      $(".view").empty();
+        console.log(data);
 
 	      var allContainer = $('<div class="row"><div class= "col-xs-12"><div class="panel panel-default"><div class="panel-heading"><h3 class="panel-title panelTitle">All Titles</h3></div><div class="panel-body content-wrapper allTitles"></div></div></div><div>')
 
@@ -121,17 +86,22 @@ $(document).ready(function(){
 	      		futureDiv.append(imgDiv);
 	      		futureDiv.data("clickedData", data[i]);
 	      		$('.allTitles').append(futureDiv)
-	      		$('.view').append(allContainer)
+	      		$('.viewAll').append(allContainer)
 	      }
 	  })
 	}
 
   function handleMyMovie(){
+
+  		$(".ajaxStyle").empty();
+
   		var clickedData = $(this).data("clickedData")
   		id = $(this).data("clickedData").imdb_id;
 
   		console.log(id);
   		console.log(typeof id);
+
+  		console.log(clickedData)
 
   		//show the modal
   		$("#modelPersonalMovie").modal("show");
@@ -144,14 +114,27 @@ $(document).ready(function(){
   		//hiddien once user clicks edit
   		$("#editNotes").html(clickedData.notes);
 
+  		if(clickedData.type == 'game') { 
+        $(".movieAjax").css('display', 'none')
+      } else {
+      	$(".movieAjax").css('display', 'block')
+      }
+
+      if (clickedData.type == 'game') {
+      	changedPoster = clickedData.poster 
+  			return; 
+  		}
+
+  		console.log("didn't return")
+
       $.ajax({
           method: 'GET',
           url: "/movie/" + id
       }).done(function(data){
-         console.log(data);
+         console.log(data)
 
          if(data.actors) {
-         		$(".actors").html("Actors: " + data.actors); 
+         	$(".actors").html("Actors: " + data.actors); 
          }
          if(data.awards) {
          	$(".awards").html("Awards: " + data.awards);
@@ -196,7 +179,13 @@ $(document).ready(function(){
 
   function handleUpdate(){
 
-  	changedCategory = $("#changeCategory").val();
+    // if($("#changeCategory").val() == '') {
+    //   changedCategory = currentCategory
+    // } else {
+    //   changedCategory = $("#changeCategory").val();
+    // }
+
+    changedCategory = $("#changeCategory").val();
   	changedNotes = $("#editNotes").val();
 
   	updateObj ={
@@ -206,8 +195,6 @@ $(document).ready(function(){
   		imdb_id: id,
   		userID: userSelect
   	}
-
-  	console.log("RIGHT BEFORE THE ROUTE")
 
     $.ajax({
       method: "PUT",
@@ -236,188 +223,11 @@ $(document).ready(function(){
       console.log("delete worked")
       window.location.href = "/";
     });
-
-
   }
-  
 
-	function movieSearch(){
-		$.ajax({
-			method: 'GET',
-			url: '/imdb-search/' + searchMovie
-		}).done(function(data){
-			console.log("\nAJAX RESPONSE");
-			console.log(data.results);
+  getEmail()
 
-			var results = data.results; 
-			searchContainer.empty();
-			searchBody.empty(); 
-
-			for (var i = 0; i < results.length; i++) {
-				// topSearch.push(createSearchContainer(results[i])); 
-
-				var newSearchbody = $("<div>");
-				newSearchbody.addClass("searchBlock"); 
-
-				var newClass = newSearchbody.addClass("newclass" + i);
-
-				var newImg = $("<img src = " + results[i].poster + " alt= 'poster' height= '300px' width= '200px'>");
-				newSearchbody.append(newImg); 
-
-				var newTitle = $("<div class= titleText><h4>"); 
-				newTitle.text(results[i].title); 
-				newSearchbody.append(newTitle); 
-
-				var newYear = $("<p>"); 
-				newYear.text(results[i].year); 
-				newSearchbody.append(newYear);  
-
-				var addBtn = $("<button>").addClass("btn btn-success"); 
-				addBtn.text("Add"); 
-				addBtn.attr("id", "add"); 
-				newSearchbody.append(addBtn); 
-
-				newSearchbody.data('results', results[i]);
-
-				// console.log($('.newClass1').data('results'));
-
-				searchBody.append(newSearchbody);
-
-				searchContainer.append(searchBody);
-
-				// $("#searchTest").append(searchContainer);
-			}
-
-			
-		}); 
-	} //end movieSearch 
-
-
-// -----------------------------------------------------------------------------------
-
-	function handleAdd() {
-		// event.preventDefault(); 
-		//reset the array for hold the movie object
-		addArray=[];
-
-		//button
-		// console.log($(this));
-		//shows that the button is type of object
-		// console.log(typeof $(this))
-
-		//target the selected div where the movie is stored. 'this' refers to the add button (which is an object!)
-		//** 'this' always refers to the value of an object	(invoking object) **
-	 	currentPosition = $(this)
-			.parent()
-			.data("results")		
-
-		console.log("\nCURRENT MOVIE/ MOVIE THAT USER ADDED");
-		console.log(currentPosition);
-
-		// //select data-result 
-		// var getBackMyJSON = $('.newclass1').data('results').title;
-		// console.log(getBackMyJSON);
-
-		$(".searchContainer").hide(); 
-		$(".chosenTitle").append("<b>Title: </b>");
-		$(".chosenTitle").append("<br><b>" + currentPosition.title + "</b>");
-
-		//DOM for category
-		var newForm = $("<form>"); 
-		var newFormClass = $("<div>").addClass("form-group");
-		var label = $("<label for= 'category' >Select Catagory:</label>"); 
-		var dropDown = $("<select class='form-control' id='category'>"); 
-		var option = $("<option value='futureSeries'>What to Watch</option><option value='currentSeries'>Currently Watching</option><option value='notCaughtUpSeries'>Not Caught Up</option><option value='caughtUpSeries'>Caught Up</option><option value='finishedSeries'>Finished Watching</option></select>"); 
-
-		dropDown.append(option); 
-		label.append(dropDown); 
-		newFormClass.append(label); 
-		newForm.append(newFormClass); 
-		chosenCategory.append(newForm); 
-
-		//DOM for notes
-		var newFormClass2 = $("<div>").addClass("form-group");
-		var label2 = $("<label for= 'notes' >Notes:</label>"); 
-		var textarea = $("<textarea rows='4' id='notes'></textarea>").addClass("form-control"); 
-
-		label2.append(textarea); 
-		newFormClass2.append(label2); 
-		chosenNotes.append(newFormClass2); 
-
-		$("#firstModalFooter").css("display", "block"); 
-
-	} // handleAdd
-
-
-	function handleSubmit(event) {
-		event.preventDefault(); 
-
-		//the 'this' points to the submit button since it is an object---we turned the submit button into a jquery object
-		// console.log($(this));
-
-		//getting info for columns 
-		var thePoster = currentPosition.poster;
-		var theTitle = currentPosition.title;
-		var theIMDBID = currentPosition.imdbid;
-		var theCategory = $("#category option:selected").val(); 
-		var theNotes = $("#notes").val(); 
-
-		console.log("The category is : " + theCategory);
-
-		addArray.push(thePoster, theTitle, theIMDBID, theCategory, theNotes);
-		
-		//we don't need this array? We can pass in values from above into newMovie
-		console.log("\nADDED COLUMN INFO TO ARRAY: AFTER USER CLICKS SUBMIT BUTTON")
-		console.log(addArray);
-
-		var newMovie = {
-			title: addArray[1], 
-			category: addArray[3],
-			notes: addArray[4],
-			imdb_id: addArray[2],
-			poster: addArray[0],
-			userID: userSelect
-		}; 
-
-		console.log("\nNEW MOVIE OBJECT CREATED:")
-		console.log(newMovie);
-
-		if (!addArray[3]) {
-			return; 
-		} else {
-			submitMovie(newMovie); 
-		} 
-
-	} // handleSubmit 
-
-
-	function submitMovie(Movie) {
-		console.log("before ajax post");
-		$.ajax({
-			type: 'POST',
-			url:'/api/movies',
-			data: Movie
-		}).done(function(){
-			console.log("posted data");	
-
-			//redirects us back to the movies html
-			window.location.href = "/";
-
-		})
-	}//handle submitMovie
-
-	//christians help
-	function handleMovieFormSearch(event) {
-		event.preventDefault();	
-
-		// $("#searchTop").css('display', 'none')
-
-		searchContainer.show()
-		//show the panel body once user clicks search;
-		searchMovie = $("#searchMovie").val().trim();
-		movieSearch();
-
-	}; //handleMovieFormSubmit
+  // -------------------------------------------
 
 });
 

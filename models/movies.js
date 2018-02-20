@@ -16,8 +16,11 @@ module.exports = function(sequelize, DataTypes){
 			type: DataTypes.STRING,
 		}, 
 		userID: {
+			type: DataTypes.INTEGER,
+		},
+		type: {
 			type: DataTypes.STRING
-		}
+		},
 
 	},
 	    {

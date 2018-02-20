@@ -63,12 +63,11 @@ module.exports= function(app){
   });
 
 	//route to handle imdb get movie request
-	app.get('/api/movies', function(req, res){
+	app.get('/api/movies/:id', function(req, res){
 		console.log(db.Movie)
-		db.Movie.findAll({},
-      {
+		db.Movie.findAll({
         where: {
-          userID: req.body.userID
+          userID: req.params.id
         }
       }).then(function(data){
 			console.log(data);
@@ -85,7 +84,8 @@ module.exports= function(app){
 			notes: req.body.notes,
 			imdb_id: req.body.imdb_id,
 			poster: req.body.poster,
-      userID: req.body.userID
+      userID: req.body.userID,
+      type: req.body.type
 			
 		}).then(function(data) {
 			res.json(data);
