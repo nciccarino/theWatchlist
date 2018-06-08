@@ -173,7 +173,6 @@ $(document).ready(function(){
 	} // handleSubmit 
 
 	function submitMovie(Movie) {
-		console.log("before ajax post");
 		$.ajax({
 			type: 'POST',
 			url:'/api/movies',
