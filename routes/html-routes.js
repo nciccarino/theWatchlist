@@ -43,4 +43,8 @@ module.exports = function(app) {
         res.sendFile(path.join(__dirname, "../public/html/collections.html"));
     })
 
+    app.get("/marvel", function(req, res) {
+        res.sendFile(path.join(__dirname, "../public/marvel.html"));
+    });
+
 };
