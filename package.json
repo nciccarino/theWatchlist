@@ -29,7 +29,7 @@
     "passport": "^0.3.2",
     "passport-local": "^1.0.0",
     "path": "^0.12.7",
-    "sequelize": "^4.44.3",
+    "sequelize": "^5.15.1",
     "sequelize-cli": "^4.0.0"
   }
 }
